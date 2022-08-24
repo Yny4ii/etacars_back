@@ -4,6 +4,7 @@ const axios = require("axios");
 
 const getCurrencies = async () => {
   const response = await axios.get(API);
-  return await response.data.data;
+  const data = await response.data;
+  return data.data;
 };
-module.exports = getCurrencies();
+module.exports = getCurrencies;

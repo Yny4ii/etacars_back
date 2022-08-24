@@ -4,7 +4,7 @@
   "description": "nodejs server",
   "main": "index.js",
   "scripts": {
-    "dev": "node index.js"
+    "dev": "nodemon index.js"
   },
   "author": "ilya",
   "license": "ISC",
