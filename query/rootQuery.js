@@ -7,21 +7,25 @@ const Currency = require("../types/Currency");
 const History = require("../types/History");
 const getCurrencies = require("./getCurrencies");
 const getCurrencyHistory = require("./getCurrencyHistory");
-const { GraphQLString } = require("graphql");
+const { GraphQLString, GraphQLInt } = require("graphql");
 
 const rootQuery = new GraphQLObjectType({
   name: "RootQueryType",
   fields: {
     getCurrencies: {
+      args: {
+        limit: { type: GraphQLInt },
+        offset: { type: GraphQLInt },
+      },
       type: new GraphQLList(Currency),
-      async resolve() {
-        return await getCurrencies();
+      async resolve(_, { limit, offset }) {
+        return await getCurrencies(limit, offset);
       },
     },
     getCurrencyHistory: {
       type: new GraphQLList(History),
       args: { id: { type: GraphQLString } },
-      async resolve(_, {id}) {
+      async resolve(_, { id }) {
         return await getCurrencyHistory(id);
       },
     },
