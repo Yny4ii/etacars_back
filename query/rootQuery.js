@@ -7,6 +7,7 @@ const Currency = require("../types/Currency");
 const History = require("../types/History");
 const getCurrencies = require("./getCurrencies");
 const getCurrencyHistory = require("./getCurrencyHistory");
+const getCurrency = require("./getCurrency");
 const { GraphQLString, GraphQLInt } = require("graphql");
 
 const rootQuery = new GraphQLObjectType({
@@ -27,6 +28,13 @@ const rootQuery = new GraphQLObjectType({
       args: { id: { type: GraphQLString } },
       async resolve(_, { id }) {
         return await getCurrencyHistory(id);
+      },
+    },
+    getCurrency: {
+      type: Currency,
+      args: { id: { type: GraphQLString } },
+      async resolve(_, { id }) {
+        return await getCurrency(id);
       },
     },
   },
